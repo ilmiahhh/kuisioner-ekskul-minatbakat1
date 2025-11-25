@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuisioner Minat & Bakat Ekstrakurikuler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --green-primary: #3affc4;
+            --green-light: #a3e4b9;
+            --green-dark: #27ae60;
+            --blue-primary: #3498db;
+            --blue-light: #aed6f1;
+            --blue-dark: #2980b9;
+            --black: #333333;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+            color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .welcome-screen, .question-screen, .result-screen {
+            text-align: center;
+        }
+        
+        .welcome-icon {
+            font-size: 80px;
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--green-primary);
+            border: 2px solid var(--green-primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--green-primary);
+            color: var(--white);
+        }
+        
+        .question-number {
+            color: var(--green-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: var(--black);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background-color: var(--gray-light);
+            border: 2px solid transparent;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            border-color: var(--blue-light);
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: var(--green-primary);
+            background-color: var(--green-light);
+        }
+        
+        .option-icon {
+            margin-right: 10px;
+            color: var(--blue-primary);
+            font-size: 20px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .result-icon {
+            font-size: 60px;
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            color: var(--green-primary);
+            margin-bottom: 15px;
+        }
+        
+        .result-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .extracurricular-card {
+            background: linear-gradient(135deg, var(--green-light), var(--blue-light));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--blue-primary);
+        }
+        
+        .extracurricular-card h3 {
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .extracurricular-card i {
+            margin-right: 10px;
+        }
+        
+        .progress-container {
+            background-color: var(--gray-light);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .recommendation-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--gray-light);
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            border-left: 4px solid var(--green-primary);
+        }
+        
+        .recommendation-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+        }
+        
+        .recommendation-item i {
+            color: var(--blue-primary);
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .recommendation-text {
+            flex: 1;
+        }
+        
+        .recommendation-text h4 {
+            margin-bottom: 5px;
+            color: var(--blue-dark);
+        }
+        
+        .score-bar {
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green-primary), var(--blue-primary));
+            border-radius: 3px;
+        }
+        
+        .category-title {
+            background: linear-gradient(135deg, var(--green-primary), var(--blue-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            margin: 25px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px dashed var(--green-light);
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .question-text {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-star"></i> Kuisioner Minat & Bakat</h1>
+            <p>Temukan ekstrakurikuler yang tepat untuk kamu!</p>
+        </div>
+        
+        <div class="content">
+            <!-- Layar Selamat Datang -->
+            <div id="welcome-screen" class="welcome-screen">
+                <div class="welcome-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h2>Selamat Datang!</h2>
+                <p>Ikuti kuisioner ini untuk menemukan ekstrakurikuler yang paling sesuai dengan minat dan bakat kamu. Kuisioner ini terdiri dari 10 pertanyaan pilihan ganda.</p>
+                <button id="start-btn" class="btn">Mulai Kuisioner <i class="fas fa-arrow-right"></i></button>
+            </div>
+            
+            <!-- Layar Pertanyaan -->
+            <div id="question-screen" class="question-screen hidden">
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar" style="width: 10%;"></div>
+                </div>
+                <div class="question-number">Pertanyaan <span id="current-question">1</span> dari 10</div>
+                <h2 id="question-text" class="question-text">Apa kegiatan yang paling kamu sukai?</h2>
+                
+                <div id="options" class="options">
+                    <!-- Opsi akan diisi oleh JavaScript -->
+                </div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                    <button id="next-btn" class="btn">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Layar Hasil -->
+            <div id="result-screen" class="result-screen hidden">
+                <div class="result-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="result-title">Rekomendasi Ekstrakurikuler</h2>
+                <p class="result-description">Berdasarkan jawaban yang kamu berikan, berikut adalah rekomendasi ekstrakurikuler yang sesuai dengan minat dan bakat kamu:</p>
+                
+                <div id="recommendation-result">
+                    <!-- Hasil rekomendasi akan diisi oleh JavaScript -->
+                </div>
+                
+                <button id="restart-btn" class="btn"><i class="fas fa-redo"></i> Ulangi Kuisioner</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen UI
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const questionScreen = document.getElementById('question-screen');
+            const resultScreen = document.getElementById('result-screen');
+            const startBtn = document.getElementById('start-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const questionText = document.getElementById('question-text');
+            const currentQuestionElement = document.getElementById('current-question');
+            const optionsContainer = document.getElementById('options');
+            const progressBar = document.getElementById('progress-bar');
+            const recommendationResult = document.getElementById('recommendation-result');
+            
+            // Data pertanyaan dan pilihan
+            const questions = [
+                {
+                    text: "Apa kegiatan yang paling kamu sukai?",
+                    options: [
+                        { text: "Bermain dengan bola", value: "olahraga" },
+                        { text: "Menari mengikuti irama musik", value: "seni_perform" },
+                        { text: "Menggambar atau melukis", value: "seni_visual" },
+                        { text: "Memecahkan teka-teki atau masalah", value: "akademik" },
+                        { text: "Bermain alat musik", value: "musik" },
+                        { text: "Menanam tanaman atau merawat hewan", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Bagaimana kamu lebih suka menghabiskan waktu luang?",
+                    options: [
+                        { text: "Bermain di luar ruangan", value: "olahraga" },
+                        { text: "Berlatih gerakan-gerakan", value: "seni_perform" },
+                        { text: "Membuat karya kreatif", value: "seni_visual" },
+                        { text: "Membaca atau melakukan eksperimen", value: "akademik" },
+                        { text: "Mendengarkan atau bermain musik", value: "musik" },
+                        { text: "Menjelajahi alam atau berkebun", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Aktivitas apa yang paling membuat kamu bersemangat?",
+                    options: [
+                        { text: "Olahraga kelompok", value: "olahraga" },
+                        { text: "Menonton pertunjukan seni", value: "seni_perform" },
+                        { text: "Mengunjungi pameran seni", value: "seni_visual" },
+                        { text: "Mempelajari hal-hal baru", value: "akademik" },
+                        { text: "Konser atau pertunjukan musik", value: "musik" },
+                        { text: "Kegiatan di alam terbuka", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Keterampilan apa yang ingin kamu kuasai?",
+                    options: [
+                        { text: "Keterampilan olahraga", value: "olahraga" },
+                        { text: "Keterampilan menari atau akting", value: "seni_perform" },
+                        { text: "Keterampilan seni rupa", value: "seni_visual" },
+                        { text: "Keterampilan penelitian", value: "akademik" },
+                        { text: "Keterampilan bermusik", value: "musik" },
+                        { text: "Keterampilan bertahan di alam", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Apa tujuan utama kamu mengikuti ekstrakurikuler?",
+                    options: [
+                        { text: "Untuk kesehatan dan kebugaran", value: "olahraga" },
+                        { text: "Mengekspresikan diri melalui gerakan", value: "seni_perform" },
+                        { text: "Mengembangkan kreativitas", value: "seni_visual" },
+                        { text: "Memahami bagaimana sesuatu bekerja", value: "akademik" },
+                        { text: "Menghasilkan musik yang indah", value: "musik" },
+                        { text: "Menjaga dan melestarikan alam", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Bagaimana kamu lebih suka bekerja?",
+                    options: [
+                        { text: "Dalam tim", value: "olahraga" },
+                        { text: "Secara individu dengan bimbingan", value: "seni_perform" },
+                        { text: "Sendiri dengan kebebasan penuh", value: "seni_visual" },
+                        { text: "Dalam kelompok kecil untuk diskusi", value: "akademik" },
+                        { text: "Bersama-sama dalam kelompok musik", value: "musik" },
+                        { text: "Sendiri atau dalam kelompok kecil", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Apa yang paling kamu nikmati dari sebuah kegiatan?",
+                    options: [
+                        { text: "Persaingan dan tantangan", value: "olahraga" },
+                        { text: "Keindahan dan ekspresi", value: "seni_perform" },
+                        { text: "Kreasi dan imajinasi", value: "seni_visual" },
+                        { text: "Penemuan dan pemahaman", value: "akademik" },
+                        { text: "Harmoni dan melodi", value: "musik" },
+                        { text: "Kedamaian dan keselarasan", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Apa peran favorit kamu dalam kelompok?",
+                    options: [
+                        { text: "Pelaksana atau pemain", value: "olahraga" },
+                        { text: "Penghibur atau performer", value: "seni_perform" },
+                        { text: "Desainer atau kreator", value: "seni_visual" },
+                        { text: "Pemecah masalah atau peneliti", value: "akademik" },
+                        { text: "Pencipta lagu atau pemain musik", value: "musik" },
+                        { text: "Pemimpin ekspedisi atau penjaga alam", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Bagaimana kamu menghadapi tantangan?",
+                    options: [
+                        { text: "Dengan semangat kompetitif", value: "olahraga" },
+                        { text: "Dengan ketekunan berlatih", value: "seni_perform" },
+                        { text: "Dengan berpikir out of the box", value: "seni_visual" },
+                        { text: "Dengan analisis mendalam", value: "akademik" },
+                        { text: "Dengan ekspresi emosi melalui musik", value: "musik" },
+                        { text: "Dengan kesabaran dan pengamatan", value: "alam" }
+                    ]
+                },
+                {
+                    text: "Apa yang ingin kamu capai dalam ekstrakurikuler?",
+                    options: [
+                        { text: "Menang dalam kompetisi", value: "olahraga" },
+                        { text: "Menguasai teknik tertentu", value: "seni_perform" },
+                        { text: "Menghasilkan karya yang dipamerkan", value: "seni_visual" },
+                        { text: "Memecahkan masalah kompleks", value: "akademik" },
+                        { text: "Menciptakan komposisi musik", value: "musik" },
+                        { text: "Berkontribusi pada pelestarian alam", value: "alam" }
+                    ]
+                }
+            ];
+            
+            // Data ekstrakurikuler
+            const extracurriculars = {
+                olahraga: [
+                    { name: "Futsal", icon: "fas fa-futbol", description: "Meningkatkan keterampilan bermain bola, kerja tim, dan kebugaran fisik." },
+                    { name: "Basket", icon: "fas fa-basketball-ball", description: "Mengembangkan koordinasi mata-tangan, strategi, dan kerja sama tim." },
+                    { name: "Bulu Tangkis", icon: "fas fa-table-tennis", description: "Melatih kecepatan, ketangkasan, dan refleks melalui permainan raket." },
+                    { name: "Pencak Silat", icon: "fas fa-fist-raised", description: "Belajar seni bela diri tradisional Indonesia dan disiplin diri." }
+                ],
+                seni_perform: [
+                    { name: "Tari Tradisional", icon: "fas fa-music", description: "Mempelajari dan melestarikan tarian daerah Indonesia." },
+                    { name: "Teater", icon: "fas fa-theater-masks", description: "Mengembangkan kemampuan akting, ekspresi, dan public speaking." },
+                    { name: "Modern Dance", icon: "fas fa-child", description: "Mengekspresikan diri melalui gerakan tari kontemporer." },
+                    { name: "Paduan Suara", icon: "fas fa-users", description: "Melatih harmonisasi vokal dan kerja sama dalam bernyanyi." }
+                ],
+                seni_visual: [
+                    { name: "Lukis dan Gambar", icon: "fas fa-paint-brush", description: "Mengembangkan kreativitas melalui media lukis dan gambar." },
+                    { name: "Kriya dan Kerajinan", icon: "fas fa-palette", description: "Membuat karya seni dari berbagai bahan dan teknik." },
+                    { name: "Fotografi", icon: "fas fa-camera", description: "Belajar teknik pengambilan gambar dan komposisi visual." },
+                    { name: "Desain Grafis", icon: "fas fa-laptop", description: "Menciptakan karya visual menggunakan teknologi digital." }
+                ],
+                akademik: [
+                    { name: "Klub Sains", icon: "fas fa-flask", description: "Melakukan eksperimen dan memecahkan masalah ilmiah." },
+                    { name: "Debat Bahasa Inggris", icon: "fas fa-comments", description: "Melatih kemampuan berargumentasi dalam bahasa asing." },
+                    { name: "Robotika", icon: "fas fa-robot", description: "Merancang dan memprogram robot untuk menyelesaikan tugas." },
+                    { name: "Jurnalistik", icon: "fas fa-newspaper", description: "Mempelajari teknik penulisan berita dan reportase." }
+                ],
+                musik: [
+                    { name: "Band Sekolah", icon: "fas fa-guitar", description: "Bermain musik dalam kelompok dengan berbagai instrumen." },
+                    { name: "Angklung", icon: "fas fa-music", description: "Melestarikan dan memainkan alat musik tradisional Indonesia." },
+                    { name: "Piano/Kibor", icon: "fas fa-keyboard", description: "Belajar teknik bermain piano atau keyboard." },
+                    { name: "Grup Vokal", icon: "fas fa-microphone", description: "Menyanyi dalam kelompok dengan harmoni yang indah." }
+                ],
+                alam: [
+                    { name: "Pecinta Alam", icon: "fas fa-mountain", description: "Kegiatan pendakian, camping, dan pelestarian lingkungan." },
+                    { name: "Berkebun Organik", icon: "fas fa-seedling", description: "Menanam tanaman dan belajar pertanian berkelanjutan." },
+                    { name: "Kelompok Ilmiah Remaja", icon: "fas fa-leaf", description: "Penelitian lingkungan dan konservasi alam." },
+                    { name: "Pramuka", icon: "fas fa-campground", description: "Mengembangkan keterampilan bertahan hidup di alam." }
+                ]
+            };
+            
+            // Variabel state
+            let currentQuestion = 0;
+            let answers = [];
+            let scores = {
+                olahraga: 0,
+                seni_perform: 0,
+                seni_visual: 0,
+                akademik: 0,
+                musik: 0,
+                alam: 0
+            };
+            
+            // Inisialisasi aplikasi
+            function initApp() {
+                // Reset state
+                currentQuestion = 0;
+                answers = [];
+                scores = {
+                    olahraga: 0,
+                    seni_perform: 0,
+                    seni_visual: 0,
+                    akademik: 0,
+                    musik: 0,
+                    alam: 0
+                };
+                
+                // Sembunyikan semua layar kecuali welcome
+                welcomeScreen.classList.remove('hidden');
+                questionScreen.classList.add('hidden');
+                resultScreen.classList.add('hidden');
+            }
+            
+            // Tampilkan pertanyaan
+            function showQuestion() {
+                const question = questions[currentQuestion];
+                questionText.textContent = question.text;
+                currentQuestionElement.textContent = currentQuestion + 1;
+                
+                // Update progress bar
+                progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+                
+                // Kosongkan opsi sebelumnya
+                optionsContainer.innerHTML = '';
+                
+                // Tambahkan opsi
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    if (answers[currentQuestion] === option.value) {
+                        optionElement.classList.add('selected');
+                    }
+                    
+                    optionElement.innerHTML = `
+                        <i class="option-icon fas fa-${getOptionIcon(index)}"></i>
+                        ${option.text}
+                    `;
+                    
+                    optionElement.addEventListener('click', () => {
+                        selectOption(optionElement, option.value);
+                    });
+                    
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                // Atur status tombol navigasi
+                prevBtn.disabled = currentQuestion === 0;
+            }
+            
+            // Dapatkan ikon untuk opsi
+            function getOptionIcon(index) {
+                const icons = ['futbol', 'music', 'paint-brush', 'flask', 'guitar', 'leaf'];
+                return icons[index];
+            }
+            
+            // Pilih opsi
+            function selectOption(optionElement, value) {
+                answers[currentQuestion] = value;
+                
+                // Update tampilan opsi terpilih
+                const options = optionsContainer.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                optionElement.classList.add('selected');
+            }
+            
+            // Hitung hasil
+            function calculateResult() {
+                // Reset scores
+                scores = {
+                    olahraga: 0,
+                    seni_perform: 0,
+                    seni_visual: 0,
+                    akademik: 0,
+                    musik: 0,
+                    alam: 0
+                };
+                
+                // Hitung skor berdasarkan jawaban
+                answers.forEach(answer => {
+                    if (scores.hasOwnProperty(answer)) {
+                        scores[answer]++;
+                    }
+                });
+                
+                return scores;
+            }
+            
+            // Tampilkan hasil
+            function showResult() {
+                const scores = calculateResult();
+                
+                // Urutkan kategori berdasarkan skor tertinggi
+                const sortedCategories = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+                
+                recommendationResult.innerHTML = '';
+                
+                // Tampilkan rekomendasi untuk 3 kategori teratas
+                for (let i = 0; i < Math.min(3, sortedCategories.length); i++) {
+                    const category = sortedCategories[i];
+                    const categoryScore = scores[category];
+                    const maxScore = questions.length;
+                    
+                    const categoryTitle = document.createElement('h3');
+                    categoryTitle.textContent = getCategoryName(category);
+                    categoryTitle.classList.add('category-title');
+                    recommendationResult.appendChild(categoryTitle);
+                    
+                    const scoreText = document.createElement('p');
+                    scoreText.textContent = `Kecocokan: ${categoryScore}/${maxScore}`;
+                    scoreText.style.marginBottom = '10px';
+                    recommendationResult.appendChild(scoreText);
+                    
+                    const scoreBar = document.createElement('div');
+                    scoreBar.classList.add('score-bar');
+                    const scoreFill = document.createElement('div');
+                    scoreFill.classList.add('score-fill');
+                    scoreFill.style.width = `${(categoryScore / maxScore) * 100}%`;
+                    scoreBar.appendChild(scoreFill);
+                    recommendationResult.appendChild(scoreBar);
+                    
+                    const recommendationList = document.createElement('div');
+                    recommendationList.classList.add('recommendation-list');
+                    
+                    extracurriculars[category].forEach(extracurricular => {
+                        const item = document.createElement('div');
+                        item.classList.add('recommendation-item');
+                        item.innerHTML = `
+                            <i class="${extracurricular.icon}"></i>
+                            <div class="recommendation-text">
+                                <h4>${extracurricular.name}</h4>
+                                <p>${extracurricular.description}</p>
+                            </div>
+                        `;
+                        recommendationList.appendChild(item);
+                    });
+                    
+                    recommendationResult.appendChild(recommendationList);
+                }
+            }
+            
+            // Dapatkan nama kategori yang lebih deskriptif
+            function getCategoryName(category) {
+                const names = {
+                    olahraga: "Olahraga dan Aktivitas Fisik",
+                    seni_perform: "Seni Pertunjukan",
+                    seni_visual: "Seni Visual dan Kreativitas",
+                    akademik: "Akademik dan Ilmu Pengetahuan",
+                    musik: "Musik dan Suara",
+                    alam: "Alam dan Lingkungan"
+                };
+                return names[category] || category;
+            }
+            
+            // Event listeners
+            startBtn.addEventListener('click', () => {
+                welcomeScreen.classList.add('hidden');
+                questionScreen.classList.remove('hidden');
+                showQuestion();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion();
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (answers[currentQuestion] === undefined) {
+                    alert('Silakan pilih salah satu opsi sebelum melanjutkan.');
+                    return;
+                }
+                
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    // Selesaikan kuesioner dan tampilkan hasil
+                    questionScreen.classList.add('hidden');
+                    resultScreen.classList.remove('hidden');
+                    showResult();
+                }
+            });
+            
+            restartBtn.addEventListener('click', () => {
+                initApp();
+            });
+            
+            // Inisialisasi aplikasi saat pertama kali dimuat
+            initApp();
+        });
+    </script>
+</body>
+</html> 
