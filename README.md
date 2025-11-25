@@ -1,0 +1,1 @@
+# kuisioner-ekskul-minatbakat1
